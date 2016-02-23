@@ -53,12 +53,9 @@ def initGPIO():
 	os.system("echo 0 > /sys/class/gpio/gpio45/value")
 
 ##affichage()
-#Affiche l'etat du systeme
-#@param angleSm1 angle du servomoteur 1
-#@param angleSm2 angle du servomoteur 2
-#@param laser etat du laser
-#@param mode manuel ou auto
-#@param uart1 pour envoi des informations sur l'uart
+#Affiche l'angle des servomoteurs
+#Affiche l'etat du laser
+#affiche le mode manuel ou predefini
 def affichage(angleSm1, angleSm2, laser, mode, uart1):
 
 	angleSm1 = str(angleSm1)
@@ -108,8 +105,6 @@ def laser(etat):
 	else:
 		os.system("echo 0 > /sys/class/gpio/gpio45/value")
 
-##carre(UART1)
-#dessine un carre avec un angle -20<angle<20
 def carre(UART1):
 
 	laser("on")
@@ -123,28 +118,26 @@ def carre(UART1):
 
 		for i in range(10):
 			x += 4
-			sleep(0.001)
+			sleep(0.01)
 			servomoteur1(x)
 		
 		for i in range(10):
 			y -= 4
-			sleep(0.001)
+			sleep(0.01)
 			servomoteur2(y)
 
 		for i in range(10):
 			x -= 4
-			sleep(0.001)
+			sleep(0.01)
 			servomoteur1(x)
 
 		for i in range(10):
 			y += 4
-			sleep(0.001)
+			sleep(0.01)
 			servomoteur2(y)
 
 	UART1.flushInput()
 
-##losange(UART1)
-#Dessine un losange avec un angle -20<angle<20
 def losange(UART1):
 
 	laser("on")
@@ -156,38 +149,36 @@ def losange(UART1):
 
 	while UART1.read() != 'r':
 
-		for i in range(10):
+		for i in range(5):
 			x += 4
 			y += 4
-			sleep(0.001)
+			sleep(0.01)
 			servomoteur1(x)
 			servomoteur2(y)
 		
-		for i in range(10):
+		for i in range(5):
 			x += 4
 			y -= 4
-			sleep(0.001)
+			sleep(0.01)
 			servomoteur1(x)
 			servomoteur2(y)
 
-		for i in range(10):
+		for i in range(5):
 			x -= 4
 			y -= 4
-			sleep(0.001)
+			sleep(0.01)
 			servomoteur1(x)
 			servomoteur2(y)
 
-		for i in range(10):
+		for i in range(5):
 			x -= 4
 			y += 4
-			sleep(0.001)
+			sleep(0.01)
 			servomoteur1(x)
 			servomoteur2(y)
 
 	UART1.flushInput()
 
-##cercle(UART1)
-#Dessine un cercle avec un angle -20<angle<20
 def cercle(UART1):
 
 	laser("on")
@@ -200,9 +191,9 @@ def cercle(UART1):
 
 	while UART1.read() != 'r':
 
-		for i in range(40):
-			x = int(math.cos((2*3.14)/(40-i))*20.0)
-			y = int(math.sin((2*3.14)/(40-i))*20.0)
+		for i in range(0, 39):
+			x = int(math.cos(math.radians(360)*i/40.0)*20.0)
+			y = int(math.sin(math.radians(360)*i/40.0)*20.0)
 			sleep(0.001)
 			servomoteur1(x)
 			servomoteur2(y)
@@ -271,8 +262,12 @@ def modeAuto(angleSm1, angleSm2, mode, etatLaser, UART1):
 		if nmode == 0: 
 			carre(UART1)
 			nmode = 1
-		elif nmode == 1: losange(UART1)
-		elif nmode == 2: cercle(UART1)
+		elif nmode == 1:
+			losange(UART1)
+			nmode = 2
+		elif nmode == 2:
+			cercle(UART1)
+			mode = 'm'
 
 ##Programme principal
 print "Initialisations des perihperiques en cours..."
