@@ -6,10 +6,10 @@ import string
 #Affiche l'angle des servomoteurs
 #Affiche l'etat du laser
 #affiche le mode manuel ou predefini
-def parametres(angleSm1, angleSm2, laser, mode, uart1):
+def parametres(Y, X, laser, mode, uart1):
 
-	angleSm1 = str(angleSm1)
-	angleSm2 = str(angleSm2)
+	angleSm1 = str(Y)
+	angleSm2 = str(X)
 	
 	#uart1.write("\033[2J") #efface l'ecran
 	uart1.write("\033[H") #retour en position home

@@ -3,6 +3,7 @@ from time import sleep
 import serial
 import BBIO
 import math
+import Affichage
 
 ##carre(UART1)
 #@param UART1 pour la liaison serie
@@ -19,6 +20,7 @@ def carre(UART1):
 	while UART1.read() != 'r':
 
 		for i in range(20):
+			Affichage.parametres(x, y, 'on', 'a', UART1)
 			x += 2
 			sleep(0.01)
 			BBIO.servomoteur1(x)

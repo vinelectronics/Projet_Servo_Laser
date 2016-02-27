@@ -90,10 +90,13 @@ def laser(etat):
 #Allume une led pour indiquer dans quel mode de fonctionnement se trouve le programme
 def mode(MA):
 
-	if MA == 'M':
+	if MA == 'm':
 
 		os.system("echo 1 > /sys/class/gpio/gpio66/value")
 		os.system("echo 0 > /sys/class/gpio/gpio69/value")
+	elif MA == 'w':	
+		os.system("echo 1 > /sys/class/gpio/gpio66/value")
+		os.system("echo 1 > /sys/class/gpio/gpio69/value")
 	else:
 		os.system("echo 0 > /sys/class/gpio/gpio66/value")
 		os.system("echo 1 > /sys/class/gpio/gpio69/value")

@@ -4,6 +4,7 @@ import serial
 import BBIO
 import Affichage
 import Commande
+import cwiid
 
 ##modeMAnuel
 #Permet de controler les servomoteurs et le laser manuellement
@@ -27,6 +28,7 @@ def modeManuel(UART1):
 		Affichage.parametres(angleSm1, angleSm2, etatLaser, "manuel", UART1)
 		rcv = UART1.read()
 
+
 		if rcv == 'z':
 			if angleSm1 < 90:
 				angleSm1 += 10
@@ -35,11 +37,11 @@ def modeManuel(UART1):
 			if angleSm1 > -90:
 				angleSm1 -= 10
 				BBIO.servomoteur1(angleSm1)
-		elif rcv == 'q':
+		elif rcv == 'd':
 			if angleSm2 > -90:
 				angleSm2 -= 10
 				BBIO.servomoteur2(angleSm2)
-		elif rcv == 'd':
+		elif rcv == 'q':
 			if angleSm2 < 90:
 				angleSm2 += 10
 				BBIO.servomoteur2(angleSm2)
@@ -77,9 +79,6 @@ def modeAuto(UART1):
 		sleep(0.1)
 		rcv = UART1.read()
 
-		if rcv == 'e':
-			mode = 'm'
-
 		if nmode == 0: 
 			Commande.carre(UART1)
 			nmode = 1
@@ -88,5 +87,5 @@ def modeAuto(UART1):
 			nmode = 2
 		elif nmode == 2:
 			Commande.cercle(UART1)
-			nmode = 0
+			mode = 'm'
 
