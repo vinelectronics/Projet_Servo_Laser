@@ -22,22 +22,22 @@ def carre(UART1):
 		for i in range(20):
 			Affichage.parametres(x, y, 'on', 'a', UART1)
 			x += 2
-			sleep(0.01)
+			sleep(0.05)
 			BBIO.servomoteur1(x)
 		
 		for i in range(20):
 			y -= 2
-			sleep(0.01)
+			sleep(0.05)
 			BBIO.servomoteur2(y)
 
 		for i in range(20):
 			x -= 2
-			sleep(0.01)
+			sleep(0.05)
 			BBIO.servomoteur1(x)
 
 		for i in range(20):
 			y += 2
-			sleep(0.01)
+			sleep(0.05)
 			BBIO.servomoteur2(y)
 
 	UART1.flushInput()
@@ -59,28 +59,28 @@ def losange(UART1):
 		for i in range(10):
 			x += 2
 			y += 2
-			sleep(0.01)
+			sleep(0.05)
 			BBIO.servomoteur1(x)
 			BBIO.servomoteur2(y)
 		
 		for i in range(10):
 			x += 2
 			y -= 2
-			sleep(0.01)
+			sleep(0.05)
 			BBIO.servomoteur1(x)
 			BBIO.servomoteur2(y)
 
 		for i in range(10):
 			x -= 2
 			y -= 2
-			sleep(0.01)
+			sleep(0.05)
 			BBIO.servomoteur1(x)
 			BBIO.servomoteur2(y)
 
 		for i in range(10):
 			x -= 2
 			y += 2
-			sleep(0.01)
+			sleep(0.05)
 			BBIO.servomoteur1(x)
 			BBIO.servomoteur2(y)
 
@@ -104,7 +104,7 @@ def cercle(UART1):
 		for i in range(0, 79):
 			x = int(math.cos(math.radians(360)*i/80.0)*20.0)
 			y = int(math.sin(math.radians(360)*i/80.0)*20.0)
-			sleep(0.001)
+			sleep(0.01)
 			BBIO.servomoteur1(x)
 			BBIO.servomoteur2(y)
 
