@@ -4,8 +4,8 @@ from time import sleep
 
 
 ##FileWrite(valeur, chemin, TypeOuverture)
-# Ecrit 'valeur' dans le fichier ce trouvant dans 'chemin'
-# TypeOuverture, 'w' = effacer et ecrire, 'a' = ecrire à la suite
+# Ecrit 'valeur' dans le fichier ce trouvant dans 'chemin'
+# TypeOuverture, 'w' = effacer et écrire, 'a' = ecrire à la suite
 
 def FileWrite(valeur, chemin, TypeOuverture):
 
@@ -117,6 +117,9 @@ def mode(MA):
 	if MA == 'm':
 		FileWrite("1", "/sys/class/gpio/gpio66/value", "w")
 		FileWrite("0", "/sys/class/gpio/gpio69/value", "w")
+	elif MA == 'w':
+		FileWrite("1", "/sys/class/gpio/gpio66/value", "w")
+		FileWrite("1", "/sys/class/gpio/gpio69/value", "w")
 	else:
 		FileWrite("0", "/sys/class/gpio/gpio66/value", "w")
 		FileWrite("1", "/sys/class/gpio/gpio69/value", "w")
