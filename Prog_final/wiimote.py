@@ -93,7 +93,7 @@ def Wii(UART1):
 			
 			BBIO.servomoteur1(NunY)
 			BBIO.servomoteur2(NunX)
-			Affichage.parametres(NunX, NunY, etatLaser, mode, UART1)
+			Affichage.parametres(NunX, NunY, etatLaser, "Wiimote", UART1)
 			
 			if wm.state['nunchuk']['buttons'] & cwiid.NUNCHUK_BTN_Z:
 				if etatLaser == "on":
@@ -112,7 +112,7 @@ def Wii(UART1):
 			
 			BBIO.servomoteur1(accWY)
 			BBIO.servomoteur2(accWX)
-			Affichage.parametres(accWX, accWY, etatLaser, mode, UART1)
+			Affichage.parametres(accWX, accWY, etatLaser, "Wiimote", UART1)
 			
 			if wm.state['buttons'] & cwiid.BTN_A:
 				if etatLaser == "on":
