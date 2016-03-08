@@ -84,7 +84,9 @@ def Wii(UART1):
 
 	wm.led = 1
 
-	while not wm.state['buttons'] & cwiid.BTN_HOME :
+	exit = 0
+
+	while not wm.state['buttons'] & cwiid.BTN_HOME and exit == 0:
 			
 		while wm.state['ext_type'] == cwiid.EXT_NUNCHUK:
 	
@@ -101,10 +103,16 @@ def Wii(UART1):
 				else: etatLaser = "on"
 				sleep(0.2)
 				BBIO.laser(etatLaser)
-			
-			if wm.state['buttons'] & cwiid.BTN_HOME: break
+		
+			mode = UART1.read()
+	
+			if (wm.state['buttons'] & cwiid.BTN_HOME) or mode == 'p':
+				
+				if mode == 'p':
+					exit = 'p'
+				break
 			#sleep(0.08)
-									
+						
 		while wm.state['ext_type'] == cwiid.EXT_NONE:
 
 			accWX = int((wm.state['acc'][1] - 96)*(180.0/48.0)-90)
@@ -121,8 +129,18 @@ def Wii(UART1):
 				sleep(0.2)
 				BBIO.laser(etatLaser)
 			
-			if wm.state['buttons'] & cwiid.BTN_HOME: break
+			mode = UART1.read()
+				
+			if (wm.state['buttons'] & cwiid.BTN_HOME) or mode == 'p':
+				
+				if mode == 'p':
+					exit = 'p'
+				break
 			#sleep(0.08)
-			
+		
 	wm.close()
-	return 'a'
+
+	if exit != 'p':
+		exit = 'a'
+
+	return exit
