@@ -52,7 +52,7 @@ def modeManuel(UART1):
 				etatLaser = "on"
 			BBIO.laser(etatLaser)
 		elif rcv == 'e':
-			mode = 'w'
+			mode = 'a'
 		elif rcv == 'p':
 			mode = 'p'
 

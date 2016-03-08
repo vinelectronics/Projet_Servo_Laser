@@ -14,6 +14,8 @@ def FileWrite(valeur, chemin, TypeOuverture):
 	
 	#fichier.close()
 
+	
+
 ##initPWM()
 # Initialise 2 PWM sur P9_14 et P9_22
 # T = 20ms

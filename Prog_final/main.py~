@@ -19,11 +19,14 @@ print "Peripheriques initialises"
 
 sleep(1)
 
-while mode != 'p':
+while True:
 
 	if mode == 'm':
-		mode = menu.modeManuel(UART1)
+		menu.modeManuel(UART1)
+		mode = 'w'
 	elif mode == 'w':
-		mode = wiimote.Wii(UART1)
-	elif mode == 'a':
-		mode = menu.modeAuto(UART1)
+		wiimote.Wii(UART1)
+		mode = 'a'
+	else:
+		menu.modeAuto(UART1)
+		mode = 'm'

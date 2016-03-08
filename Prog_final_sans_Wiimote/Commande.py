@@ -17,7 +17,9 @@ def carre(UART1):
 	BBIO.servomoteur1(x)
 	BBIO.servomoteur2(y)
 
-	while UART1.read() != 'r':
+	exit = 0
+
+	while exit == 0:
 
 		Affichage.parametres(x, y, "On", "Automatique : carre", UART1)
 
@@ -35,7 +37,14 @@ def carre(UART1):
 
 		sleep(0.05)
 
+		mode = UART1.read()
+
+		if(mode == 'r' or mode == 'p'):
+				exit = 1
+
 	UART1.flushInput()
+
+	return mode
 
 ##losange(UART1)
 #@param UART1 pour la liaison serie
@@ -49,7 +58,9 @@ def losange(UART1):
 	BBIO.servomoteur1(x)
 	BBIO.servomoteur2(y)
 
-	while UART1.read() != 'r':
+	exit = 0
+
+	while exit == 0:
 
 		Affichage.parametres(x, y, "On", "Automatique : losange", UART1)
 		
@@ -68,9 +79,17 @@ def losange(UART1):
 
 		BBIO.servomoteur1(x)
 		BBIO.servomoteur2(y)
+
 		sleep(0.05)
 
+		mode = UART1.read()
+
+		if(mode == 'r' or mode == 'p'):
+				exit = 1
+
 	UART1.flushInput()
+
+	return mode
 
 ##cercle(UART1)
 #@param UART1 pour la liaison serie
@@ -84,8 +103,9 @@ def cercle(UART1):
 	BBIO.servomoteur1(x)
 	BBIO.servomoteur2(y)
 
+	exit = 0
 
-	while UART1.read() != 'r':
+	while exit == 0:
 
 		for i in range(0, 79):
 
@@ -97,4 +117,11 @@ def cercle(UART1):
 			BBIO.servomoteur1(x)
 			BBIO.servomoteur2(y)
 
+			mode = UART1.read()
+
+			if(mode == 'r' or mode == 'p'):
+				exit = 1
+
 	UART1.flushInput()
+
+	return mode

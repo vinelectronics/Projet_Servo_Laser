@@ -3,7 +3,6 @@ import menu
 import BBIO
 from time import sleep
 import serial
-import wiimote
 
 print "Initialisation des peripheriques..."
 
@@ -23,7 +22,7 @@ while mode != 'p':
 
 	if mode == 'm':
 		mode = menu.modeManuel(UART1)
-	elif mode == 'w':
-		mode = wiimote.Wii(UART1)
 	elif mode == 'a':
 		mode = menu.modeAuto(UART1)
+
+

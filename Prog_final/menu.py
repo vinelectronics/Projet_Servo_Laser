@@ -52,7 +52,11 @@ def modeManuel(UART1):
 				etatLaser = "on"
 			BBIO.laser(etatLaser)
 		elif rcv == 'e':
-			mode = 'a'
+			mode = 'w'
+		elif rcv == 'p':
+			mode = 'p'
+
+	return mode
 ##modeAuto
 #mode 0 : carre
 #mode 1 : losange
@@ -73,14 +77,19 @@ def modeAuto(UART1):
 
 	nmode = 0
 
+	codeExit = 0
+
 	while mode == 'a':
 
 		if nmode == 0: 
-			Commande.carre(UART1)
+			codeExit = Commande.carre(UART1)
 			nmode = 1
 		elif nmode == 1:
-			Commande.losange(UART1)
+			codeExit = Commande.losange(UART1)
 			nmode = 2
 		elif nmode == 2:
-			Commande.cercle(UART1)
+			codeExit = Commande.cercle(UART1)
 			mode = 'm'
+		if codeExit == 'p':
+			mode = 'p'
+	return mode

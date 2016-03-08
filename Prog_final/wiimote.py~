@@ -125,4 +125,4 @@ def Wii(UART1):
 			#sleep(0.08)
 			
 	wm.close()
-	return 'a'
+	mode = 'e'

@@ -18,11 +18,11 @@ print "Peripheriques initialises"
 
 sleep(1)
 
-while True:
+while mode != 'p':
 
 	if mode == 'm':
-		menu.modeManuel(UART1)
-		mode = 'a'
-	else:
-		menu.modeAuto(UART1)
-		mode = 'm'
+		mode = menu.modeManuel(UART1)
+	elif mode == 'a' or mode == 'w':
+		mode = menu.modeAuto(UART1)
+
+
