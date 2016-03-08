@@ -116,9 +116,6 @@ def mode(MA):
 	if MA == 'm':
 		FileWrite("1", "/sys/class/gpio/gpio66/value", "w")
 		FileWrite("0", "/sys/class/gpio/gpio69/value", "w")
-	elif MA == 'w':
-		FileWrite("1", "/sys/class/gpio/gpio66/value", "w")
-		FileWrite("1", "/sys/class/gpio/gpio69/value", "w")
 	else:
 		FileWrite("0", "/sys/class/gpio/gpio66/value", "w")
 		FileWrite("1", "/sys/class/gpio/gpio69/value", "w")

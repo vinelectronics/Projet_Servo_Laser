@@ -25,7 +25,7 @@ def modeManuel(UART1):
 
 	while mode == 'm':
 
-		Affichage.parametres(-angleSm2, angleSm1, etatLaser, "Manuel", UART1)
+		Affichage.parametres(angleSm1, angleSm2, etatLaser, "Manuel", UART1)
 		rcv = UART1.read()
 
 

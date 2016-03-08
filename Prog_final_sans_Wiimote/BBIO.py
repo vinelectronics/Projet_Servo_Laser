@@ -2,10 +2,9 @@
 import os
 from time import sleep
 
-
 ##FileWrite(valeur, chemin, TypeOuverture)
 # Ecrit 'valeur' dans le fichier ce trouvant dans 'chemin'
-# TypeOuverture, 'w' = effacer et ecrire, 'a' = ecrire à la suite
+# TypeOuverture, 'w' = effacer et ecrire, 'a' = ecrire a la suite
 
 def FileWrite(valeur, chemin, TypeOuverture):
 

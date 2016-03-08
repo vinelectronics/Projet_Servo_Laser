@@ -12,33 +12,28 @@ def carre(UART1):
 
 	BBIO.laser("on")
 	x = -20
-	y = 20
+	y = -20
 
 	BBIO.servomoteur1(x)
 	BBIO.servomoteur2(y)
 
 	while UART1.read() != 'r':
 
-		for i in range(20):
-			Affichage.parametres(x, y, 'on', 'a', UART1)
-			x += 2
-			sleep(0.05)
-			BBIO.servomoteur1(x)
-		
-		for i in range(20):
-			y -= 2
-			sleep(0.05)
-			BBIO.servomoteur2(y)
+		Affichage.parametres(x, y, "On", "Automatique : carre", UART1)
 
-		for i in range(20):
-			x -= 2
-			sleep(0.05)
-			BBIO.servomoteur1(x)
+		if(x == -20 and y < 20):
+			 y += 2
+		elif(x < 20 and y == 20):
+			 x += 2
+		elif(x == 20 and y > -20):
+			 y -= 2
+		elif(x > -20 and y == -20):
+			 x -= 2
 
-		for i in range(20):
-			y += 2
-			sleep(0.05)
-			BBIO.servomoteur2(y)
+		BBIO.servomoteur1(x)
+		BBIO.servomoteur2(y)
+
+		sleep(0.05)
 
 	UART1.flushInput()
 
@@ -56,33 +51,24 @@ def losange(UART1):
 
 	while UART1.read() != 'r':
 
-		for i in range(10):
-			x += 2
-			y += 2
-			sleep(0.05)
-			BBIO.servomoteur1(x)
-			BBIO.servomoteur2(y)
+		Affichage.parametres(x, y, "On", "Automatique : losange", UART1)
 		
-		for i in range(10):
+		if(x < 0 and y < 20 and y >= 0 ):
+			x += 2
+			y += 2
+		elif(x < 20 and x >= 0 and y > 0):
 			x += 2
 			y -= 2
-			sleep(0.05)
-			BBIO.servomoteur1(x)
-			BBIO.servomoteur2(y)
-
-		for i in range(10):
+		elif(x > 0 and y > -20 and y <= 0):
 			x -= 2
 			y -= 2
-			sleep(0.05)
-			BBIO.servomoteur1(x)
-			BBIO.servomoteur2(y)
-
-		for i in range(10):
+		elif(x > -20 and x <= 0 and y < 0):
 			x -= 2
 			y += 2
-			sleep(0.05)
-			BBIO.servomoteur1(x)
-			BBIO.servomoteur2(y)
+
+		BBIO.servomoteur1(x)
+		BBIO.servomoteur2(y)
+		sleep(0.05)
 
 	UART1.flushInput()
 
@@ -102,6 +88,9 @@ def cercle(UART1):
 	while UART1.read() != 'r':
 
 		for i in range(0, 79):
+
+			Affichage.parametres(x, y, "On", "Automatique : cercle", UART1)
+
 			x = int(math.cos(math.radians(360)*i/80.0)*20.0)
 			y = int(math.sin(math.radians(360)*i/80.0)*20.0)
 			sleep(0.01)

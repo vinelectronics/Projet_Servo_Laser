@@ -25,7 +25,7 @@ def modeManuel(UART1):
 
 	while mode == 'm':
 
-		Affichage.parametres(angleSm1, angleSm2, etatLaser, "manuel", UART1)
+		Affichage.parametres(-angleSm2, angleSm1, etatLaser, "Manuel", UART1)
 		rcv = UART1.read()
 
 
@@ -74,10 +74,6 @@ def modeAuto(UART1):
 	nmode = 0
 
 	while mode == 'a':
-
-		Affichage.parametres(angleSm1, angleSm2, etatLaser, mode, UART1)
-		sleep(0.1)
-		rcv = UART1.read()
 
 		if nmode == 0: 
 			Commande.carre(UART1)

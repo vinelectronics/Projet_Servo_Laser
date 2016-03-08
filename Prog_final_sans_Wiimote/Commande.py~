@@ -12,7 +12,7 @@ def carre(UART1):
 
 	BBIO.laser("on")
 	x = -20
-	y = -20
+	y = 20
 
 	BBIO.servomoteur1(x)
 	BBIO.servomoteur2(y)
@@ -21,13 +21,13 @@ def carre(UART1):
 
 		Affichage.parametres(x, y, "On", "Automatique : carre", UART1)
 
-		if(x == -20 and y < 20):
+		if(x == -20 && y < 20):
 			 y += 2
-		elif(x < 20 and y == 20):
+		elif(x < 20 && y == 20):
 			 x += 2
-		elif(x == 20 and y > -20):
+		elif(x == 20 && y > -20):
 			 y -= 2
-		elif(x > -20 and y == -20):
+		elif(x > -20 && y == -20):
 			 x -= 2
 
 		BBIO.servomoteur1(x)
@@ -53,16 +53,16 @@ def losange(UART1):
 
 		Affichage.parametres(x, y, "On", "Automatique : losange", UART1)
 		
-		if(x < 0 and y < 20 and y >= 0 ):
+		if(x < 0 && y < 20):
 			x += 2
 			y += 2
-		elif(x < 20 and x >= 0 and y > 0):
+		elif(x < 20 && y > 0):
 			x += 2
 			y -= 2
-		elif(x > 0 and y > -20 and y <= 0):
-			x -= 2
+		elif(x > 0 && y > -20):
+			x -=2
 			y -= 2
-		elif(x > -20 and x <= 0 and y < 0):
+		elif(x > -20 && y < 0):
 			x -= 2
 			y += 2
 
