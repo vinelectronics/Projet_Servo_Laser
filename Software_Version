@@ -1,0 +1,6 @@
+-Distribution Debian 7.9 (BeagleBone, BeagleBone Black, Seeed BeagleBone Green - 4GB SD) 2015-11-12
+-cwiid
+-python 2.7
+-python-pyserial
+-BeagleBoneBlack, pour la white modifier les noms de chemins d'accés aux fichiers
+-Proteus 8.3 pour le shield
