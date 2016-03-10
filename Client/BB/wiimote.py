@@ -71,8 +71,8 @@ def Wii(UART1):
 
 	BBIO.laser(Laser)
 	BBIO.servomoteur1(NunY)
-	BBIO.servomoteur2(NunX)
-	Affichage.parametres(-NunX, NunY, Laser, UART1)
+	BBIO.servomoteur2(-NunX)
+	Affichage.parametres(NunX, NunY, Laser, UART1)
 
 	wm = cwiid.Wiimote()
 
@@ -93,8 +93,8 @@ def Wii(UART1):
 			NunY = int(wm.state['nunchuk']['stick'][1] - 34*(180.0/190.0)-90)
 			
 			BBIO.servomoteur1(NunY)
-			BBIO.servomoteur2(NunX)
-			Affichage.parametres(-NunX, NunY, Laser, UART1)
+			BBIO.servomoteur2(-NunX)
+			Affichage.parametres(NunX, NunY, Laser, UART1)
 
 			Rx = UART1.readline()
 			
@@ -127,7 +127,7 @@ def Wii(UART1):
 			accWY = -1.0*int((wm.state['acc'][0] - 96)*(180.0/48.0)-90)
 			
 			BBIO.servomoteur1(accWY)
-			BBIO.servomoteur2(accWX)
+			BBIO.servomoteur2(-accWX)
 			Affichage.parametres(accWX, accWY, Laser, UART1)
 
 			Rx = UART1.readline()

@@ -17,7 +17,7 @@ def MANUEL(UART1):
 
 	BBIO.laser(Laser)
 	BBIO.servomoteur1(V)
-	BBIO.servomoteur2(H)
+	BBIO.servomoteur2(-H)
 	Affichage.parametres(V, H, Laser, UART1)
 
 	while Exit == 0:
@@ -63,7 +63,7 @@ def MANUEL(UART1):
 			UART1.flushInput()
 
 			BBIO.servomoteur1(V)
-			BBIO.servomoteur2(H)
+			BBIO.servomoteur2(-H)
 			Affichage.parametres(V, H, Laser, UART1)
 		elif Rx.find('LASER') != -1:
 
@@ -95,7 +95,7 @@ def CARRE(UART1):
 
 	BBIO.laser(Laser)
 	BBIO.servomoteur1(V)
-	BBIO.servomoteur2(H)
+	BBIO.servomoteur2(-H)
 	Affichage.parametres(V, H, Laser, UART1)
 
 	while Exit == 0:
@@ -114,7 +114,7 @@ def CARRE(UART1):
 			 H -= 2
 
 		BBIO.servomoteur1(V)
-		BBIO.servomoteur2(H)
+		BBIO.servomoteur2(-H)
 
 		sleep(0.05)
 
@@ -139,7 +139,7 @@ def LOSANGE(UART1):
 
 	BBIO.laser(Laser)
 	BBIO.servomoteur1(V)
-	BBIO.servomoteur2(H)
+	BBIO.servomoteur2(-H)
 	Affichage.parametres(V, H, Laser, UART1)
 
 	while Exit == 0:
@@ -162,7 +162,7 @@ def LOSANGE(UART1):
 			V += 2
 
 		BBIO.servomoteur1(V)
-		BBIO.servomoteur2(H)
+		BBIO.servomoteur2(-H)
 
 		sleep(0.05)
 
@@ -189,7 +189,7 @@ def CERCLE(UART1):
 
 	BBIO.laser(Laser)
 	BBIO.servomoteur1(V)
-	BBIO.servomoteur2(H)
+	BBIO.servomoteur2(-H)
 	Affichage.parametres(V, H, Laser, UART1)
 
 	while Exit == 0:
@@ -204,7 +204,7 @@ def CERCLE(UART1):
 			V = int(math.sin(math.radians(360)*i/80.0)*20.0)
 			sleep(0.01)
 			BBIO.servomoteur1(V)
-			BBIO.servomoteur2(H)
+			BBIO.servomoteur2(-H)
 
 			if Rx.find('MODE') != -1:
 

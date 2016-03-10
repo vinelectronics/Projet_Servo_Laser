@@ -70,8 +70,8 @@ def Wii(UART1):
 	Rx = "MODE,WII,ON"
 
 	BBIO.laser(Laser)
-	BBIO.servomoteur1(NunX)
-	BBIO.servomoteur2(NunY)
+	BBIO.servomoteur1(NunY)
+	BBIO.servomoteur2(NunX)
 	Affichage.parametres(-NunX, NunY, Laser, UART1)
 
 	wm = cwiid.Wiimote()
