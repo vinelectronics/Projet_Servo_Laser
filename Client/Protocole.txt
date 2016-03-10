@@ -1,9 +1,17 @@
 ***************************************************************************
+Démarrage du programme
+***************************************************************************
+$ : Envoyé par la BB pour indiquer à l'app que la BB est prête
+puis
+$ : Envoyé par l'app pour indiquer à la BB que l'app est prête
+
+***************************************************************************
 Les différents modes possible, envoyé par l'app client
 ***************************************************************************
 
 #MODE,MANU
-#MODE,WII
+#MODE,WII,ON  --> #WII,CONNECTED ou #WII,NCONNECTED
+#MODE,WII,OFF --> #WII,NCONNECTED
 #MODE,CARRE
 #MODE,LOSANGE
 #MODE,CERCLE

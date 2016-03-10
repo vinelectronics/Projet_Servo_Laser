@@ -1,0 +1,55 @@
+***************************************************************************
+Démarrage du programme
+***************************************************************************
+$ : envoyé par la BB pour indiquer à l'app que la BB est prête
+puis
+$ : Envoyé par l'app pour indiquer à la BB que l'app est prête
+
+***************************************************************************
+Les différents modes possible, envoyé par l'app client
+***************************************************************************
+
+#MODE,MANU
+#MODE,WII,ON  --> #WII,CONNECTED ou #WII,NCONNECTED
+#MODE,WII,OFF --> #WII,NCONNECTED
+#MODE,CARRE
+#MODE,LOSANGE
+#MODE,CERCLE
+
+***************************************************************************
+Modification des coordonnées des servomoteurs, envoyé par l'app client
+***************************************************************************
+
+#COORDONNEE,H,POS,xx
+#COORDONNEE,V,POS,xx
+#COORDONNEE,H,ADD,xx
+#COORDONNEE,V,ADD,xx
+
+xx : Valeur en degré, ajouter le - ou le + devant le nombre, exemple:
+	#COORDONNEE,H,POS,+10
+	#COORDONNEE,H,POS,-10
+POS : Positionne le servomoteur à la valeur xx
+ADD : Position le servomoteur de xx degrés en plus
+
+***************************************************************************
+Modificationde l'état du laser, envoyé par l'app client
+***************************************************************************
+
+#LASER,ON
+#LASER,OFF
+
+***************************************************************************
+Quitter le programme, envoyé par l'app client
+***************************************************************************
+
+#EXIT
+
+***************************************************************************
+Envoyer les paramètres de la carte, envoyé par la BB
+***************************************************************************
+
+#PARAM,*laser,*H,*V
+
+*laser : A remplacer par ON ou OFF
+*H : A remplacer par la position du servomoteur avec signe devant + ou -
+*V : A remplacer par la position du servomoteur avec signe devant + ou -
