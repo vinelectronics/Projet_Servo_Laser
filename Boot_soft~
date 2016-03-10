@@ -1,0 +1,10 @@
+Pour ajouter le programme au démarrage de la beaglebone, suivre les instructions suivantes:
+
+- Aller dans /etc/init.d/
+- Créer un fichier par exemple myscript.sh
+- Editer le script, en mettant :
+	-#!/bin/bash
+	-/home/debian/Desktop/BB/main.py &
+- Ajouter des droits au script: chmod 777 myscript.sh
+- Aller dans /etc/rc5.d et ajouter un lien symbolic :
+	- ln -s ../init.d/myscript.sh S99myscript
