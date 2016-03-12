@@ -51,8 +51,6 @@ private slots:
 
     void on_BTN_Quitter_clicked();
 
-    void closeWindow();
-
 private:
     Ui::MainWindow *ui;
     QSerialPort *serial;
