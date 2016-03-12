@@ -59,7 +59,6 @@ def Wii(UART1):
 
 	UART1.write("#WII,CONNECTE")
 
-	#print 'Connecte'
 	wm.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC | cwiid.RPT_NUNCHUK
 
 	wm.led = 1
@@ -69,20 +68,21 @@ def Wii(UART1):
 		while wm.state['ext_type'] == cwiid.EXT_NUNCHUK:
 	
 			NunX = -1.0*int((wm.state['nunchuk']['stick'][0] - 28)*(180.0/200.0)-90)
-			NunY = int(wm.state['nunchuk']['stick'][1] - 34*(180.0/190.0)-90)
+			NunY = int((wm.state['nunchuk']['stick'][1] - 34)*(180.0/192.0)-90)
 			
 			BBIO.servomoteur1(NunY)
-			BBIO.servomoteur2(-NunX)
-			Affichage.parametres(NunX, NunY, Laser, UART1)
-
+			BBIO.servomoteur2(NunX)
+			Affichage.parametres(NunY, -NunX, Laser, UART1)
+			sleep(0.01)
 			Rx = UART1.readline()
 			
-			if wm.state['nunchuk']['buttons'] & cwiid.NUNCHUK_BTN_Z:
-				if Laser == 1:
-					Laser = 0
-				else: Laser = 1
-				sleep(0.2)
-				BBIO.laser(Laser)
+			if wm.state['ext_type'] == cwiid.EXT_NUNCHUK:
+				if wm.state['nunchuk']['buttons'] & cwiid.NUNCHUK_BTN_Z:
+					if Laser == 1:
+						Laser = 0
+					else: Laser = 1
+					sleep(0.2)
+					BBIO.laser(Laser)
 
 			##Pour sortir de la fonction Wii
 			if Rx.find('MODE') != -1:
@@ -106,9 +106,9 @@ def Wii(UART1):
 			accWY = -1.0*int((wm.state['acc'][0] - 96)*(180.0/48.0)-90)
 			
 			BBIO.servomoteur1(accWY)
-			BBIO.servomoteur2(-accWX)
-			Affichage.parametres(accWX, accWY, Laser, UART1)
-
+			BBIO.servomoteur2(accWX)
+			Affichage.parametres(accWY, -accWX, Laser, UART1)
+			sleep(0.01)
 			Rx = UART1.readline()
 			
 			if wm.state['buttons'] & cwiid.BTN_A:
@@ -135,5 +135,6 @@ def Wii(UART1):
 			if Exit == 1: break
 
 	UART1.write("#WII,NCONNECTE")
+	sleep(0.01)
 	wm.close()
 	return Rx
