@@ -101,7 +101,7 @@ void MainWindow::on_BTN_connecter_clicked()
 
 void MainWindow::on_BTN_Manuel_clicked()
 {
-    if (serial->isOpen() && serial->isWritable() && mode != 'm')
+    if (serial->isOpen() && serial->isWritable())
     {
         serial->write("#MODE,MANU\n\r");
         ui->TermTransmission->setText("#MODE,MANU");
@@ -200,12 +200,14 @@ void MainWindow::SerialRead()
     }
 
 
-    if (Trame.contains("#WII")){
+    if (Trame.contains("#WII"))
+    {
         if (Trame.contains("NCONNECTE"))
         {
             ui->label_wii->setText("Déconnecté");
             ui->BTN_Wiimote->setText("Connecter");
-            mode = 'w';
+            mode = 'm';
+            ui->lineEdit_Mode->setText("MANU");
         }
         if (Trame.contains(",CONNECTE"))
         {
@@ -213,25 +215,25 @@ void MainWindow::SerialRead()
             ui->BTN_Wiimote->setText("Déconnecter");
             mode = 'w';
         }
+        ui->TermReception->setText(Trame); // Affiche la trame reçu
     }
 
-    if (Trame.size() >= 16)
-    {
+    if (Trame.size() >= 16){
         //Format de la chaine des infos : #PARAM,ON/OFF,H,V
         if (Trame.contains("#PARAM")) //Detecte la reception d'une info
         {
-            if (Trame.contains("ON")) ui->lineEdit_etat_laser->setText("ON");
-            else if(Trame.contains("OFF")) ui->lineEdit_etat_laser->setText("OFF");
+            if (Trame.contains("ON")) ui->lineEdit_etat_laser->setText("ON"); //Si l'on recoit "ON", afficher "ON" dans l'état du laser
+            else if(Trame.contains("OFF")) ui->lineEdit_etat_laser->setText("OFF"); //Si l'on recoit "OFF", afficher "OFF" dans l'état du laser
 
-            QStringList D = Trame.split(",");
+            QStringList D = Trame.split(","); // Decoupe la trame pour récuperer les chaines de caracteres entre ","
 
-            if (!D[2].isEmpty() && (D[2].startsWith("+") || D[2].startsWith("-")))
-                ui->lineEdit_Servo_H->setText(D[2]);
-            if (!D[3].isEmpty() && (D[3].startsWith("+") || D[3].startsWith("-")))
-                ui->lineEdit_servo_V->setText(D[3]);
+            ui->lineEdit_Servo_H->setText(D[2]); // Affiche la position horizontale
+
+            ui->lineEdit_servo_V->setText(D[3]); // Affiche la position verticale
+
+            ui->TermReception->setText(Trame); // Affiche la trame reçu
         }
     }
-    ui->TermReception->setText(Trame);
 }
 
 void MainWindow::on_BTN_Laser_ON_clicked()
@@ -260,19 +262,11 @@ void MainWindow::on_BTN_Laser_ON_clicked()
 
 void MainWindow::on_BTN_Quitter_clicked()
 {
-    MainWindow::closeWindow();
-}
-
-void MainWindow::closeWindow()
-{
-
-    if (serial->isOpen())
+    if (serial->isOpen() && serial->isWindowType())
     {
-        serial->write("#EXIT");
+        serial->write("#EXIT\n\r");
         ui->TermTransmission->setText("#EXIT");
         on_BTN_connecter_clicked();
     }
     MainWindow::close();
 }
-
-
