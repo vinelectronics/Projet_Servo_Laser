@@ -1,11 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QtSerialPort/QtSerialPort>
-#include <iostream>
 #include <QString>
-#include <stdio.h>
-#include <stdlib.h>
-#include <windows.h>
 
 MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent),
@@ -23,7 +19,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_BTN_Haut_clicked()
 {
-    if (serial->isOpen() && serial->isWritable() && mode == 'm'){
+    if (serial->isOpen() && serial->isWritable() && mode == 'm')
+    {
     serial->write("#COORDONNEE,V,ADD,+10\n\r");
     ui->TermTransmission->setText("#COORDONNEE,V,ADD,+10");
     }
@@ -31,7 +28,8 @@ void MainWindow::on_BTN_Haut_clicked()
 
 void MainWindow::on_BTN_Bas_clicked()
 {
-    if (serial->isOpen() && serial->isWritable() && mode == 'm'){
+    if (serial->isOpen() && serial->isWritable() && mode == 'm')
+    {
     serial->write("#COORDONNEE,V,ADD,-10\n\r");
     ui->TermTransmission->setText("#COORDONNEE,V,ADD,-10");
     }
@@ -39,7 +37,8 @@ void MainWindow::on_BTN_Bas_clicked()
 
 void MainWindow::on_BTN_Gauche_clicked()
 {
-    if (serial->isOpen() && serial->isWritable() && mode == 'm'){
+    if (serial->isOpen() && serial->isWritable() && mode == 'm')
+    {
     serial->write("#COORDONNEE,H,ADD,-10\n\r");
     ui->TermTransmission->setText("#COORDONNEE,H,ADD,-10");
     }
@@ -47,7 +46,8 @@ void MainWindow::on_BTN_Gauche_clicked()
 
 void MainWindow::on_BTN_Droit_clicked()
 {
-    if (serial->isOpen() && serial->isWritable() && mode == 'm'){
+    if (serial->isOpen() && serial->isWritable() && mode == 'm')
+    {
     serial->write("#COORDONNEE,H,ADD,+10\n\r");
     ui->TermTransmission->setText("#COORDONNEE,H,ADD,+10");
     }
@@ -55,7 +55,8 @@ void MainWindow::on_BTN_Droit_clicked()
 
 void MainWindow::on_BTN_Centre_clicked()
 {
-    if (serial->isOpen() && serial->isWritable() && mode == 'm'){
+    if (serial->isOpen() && serial->isWritable() && mode == 'm')
+    {
         serial->write("#COORDONNEE,V,POS,+0\n\r");
         serial->write("#COORDONNEE,H,POS,+0\n\r");
         ui->TermTransmission->setText("#COORDONNEE,H,POS,0");
@@ -77,7 +78,8 @@ void MainWindow::on_BTN_connecter_clicked()
         serial = new QSerialPort;
         serial->setPortName(ui->comboBox->currentText());
 
-        if (serial->open(QIODevice::ReadWrite)){
+        if (serial->open(QIODevice::ReadWrite))
+        {
             serial->setBaudRate(QSerialPort::Baud115200);
             serial->setDataBits(QSerialPort::Data8);
             serial->setFlowControl(QSerialPort::NoFlowControl);
@@ -99,7 +101,8 @@ void MainWindow::on_BTN_connecter_clicked()
 
 void MainWindow::on_BTN_Manuel_clicked()
 {
-    if (serial->isOpen() && serial->isWritable() && mode != 'm'){
+    if (serial->isOpen() && serial->isWritable() && mode != 'm')
+    {
         serial->write("#MODE,MANU\n\r");
         ui->TermTransmission->setText("#MODE,MANU");
         mode = 'm';
@@ -112,7 +115,8 @@ void MainWindow::on_BTN_Wiimote_clicked()
 {
     if (ui->BTN_Wiimote->text() == "Connecter")
     {
-        if (serial->isOpen() && serial->isWritable()){
+        if (serial->isOpen() && serial->isWritable())
+        {
             serial->write("#MODE,WII,ON\n\r");
             ui->TermTransmission->setText("#MODE,WII,ON");
             mode = 'w';
@@ -123,7 +127,8 @@ void MainWindow::on_BTN_Wiimote_clicked()
     }
     else
     {
-        if (serial->isOpen() && serial->isWritable()){
+        if (serial->isOpen() && serial->isWritable())
+        {
             serial->write("#MODE,WII,OFF\n\r");
             ui->TermTransmission->setText("#MODE,WII,OFF");
             mode = 'm';
@@ -136,7 +141,8 @@ void MainWindow::on_BTN_Wiimote_clicked()
 
 void MainWindow::on_BTN_Carre_clicked()
 {
-    if (serial->isOpen() && serial->isWritable()){
+    if (serial->isOpen() && serial->isWritable())
+    {
         serial->write("#MODE,CARRE\n\r");
         ui->TermTransmission->setText("#MODE,CARRE");
         mode = 'a';
@@ -147,7 +153,8 @@ void MainWindow::on_BTN_Carre_clicked()
 
 void MainWindow::on_BTN_Losange_clicked()
 {
-    if (serial->isOpen() && serial->isWritable()){
+    if (serial->isOpen() && serial->isWritable())
+    {
         serial->write("#MODE,LOSANGE\n\r");
         ui->TermTransmission->setText("#MODE,LOSANGE");
         mode = 'a';
@@ -158,7 +165,8 @@ void MainWindow::on_BTN_Losange_clicked()
 
 void MainWindow::on_BTN_Cercle_clicked()
 {
-    if (serial->isOpen() && serial->isWritable()){
+    if (serial->isOpen() && serial->isWritable())
+    {
         serial->write("#MODE,CERCLE\n\r");
         ui->TermTransmission->setText("#MODE,CERCLE");
         mode = 'a';
@@ -193,21 +201,25 @@ void MainWindow::SerialRead()
 
 
     if (Trame.contains("#WII")){
-        if (Trame.contains("NCONNECTE")){
+        if (Trame.contains("NCONNECTE"))
+        {
             ui->label_wii->setText("Déconnecté");
             ui->BTN_Wiimote->setText("Connecter");
             mode = 'w';
         }
-        if (Trame.contains(",CONNECTE")){
+        if (Trame.contains(",CONNECTE"))
+        {
             ui->label_wii->setText("Connecté");
             ui->BTN_Wiimote->setText("Déconnecter");
             mode = 'w';
         }
     }
 
-    if (Trame.size() >= 16){
+    if (Trame.size() >= 16)
+    {
         //Format de la chaine des infos : #PARAM,ON/OFF,H,V
-        if (Trame.contains("#PARAM")){ //Detecte la reception d'une info
+        if (Trame.contains("#PARAM")) //Detecte la reception d'une info
+        {
             if (Trame.contains("ON")) ui->lineEdit_etat_laser->setText("ON");
             else if(Trame.contains("OFF")) ui->lineEdit_etat_laser->setText("OFF");
 
@@ -220,13 +232,14 @@ void MainWindow::SerialRead()
         }
     }
     ui->TermReception->setText(Trame);
-   //else Data = serial->readLine();
 }
 
 void MainWindow::on_BTN_Laser_ON_clicked()
 {
-    if (ui->BTN_Laser_ON->text() == "Allumer laser"){
-        if (serial->isOpen() && serial->isWritable() && mode == 'm'){
+    if (ui->BTN_Laser_ON->text() == "Allumer laser")
+    {
+        if (serial->isOpen() && serial->isWritable() && mode == 'm')
+        {
             serial->write("#LASER,ON\n\r");
             ui->TermTransmission->setText("#LASER,ON");
             ui->lineEdit_etat_laser->setText("ON");
@@ -235,7 +248,8 @@ void MainWindow::on_BTN_Laser_ON_clicked()
     }
     else
     {
-        if (serial->isOpen() && serial->isWritable() && mode == 'm'){
+        if (serial->isOpen() && serial->isWritable() && mode == 'm')
+        {
             serial->write("#LASER,OFF\n\r");
             ui->TermTransmission->setText("#LASER,OFF");
             ui->lineEdit_etat_laser->setText("OFF");
@@ -249,7 +263,8 @@ void MainWindow::on_BTN_Quitter_clicked()
     MainWindow::closeWindow();
 }
 
-void MainWindow::closeWindow(){
+void MainWindow::closeWindow()
+{
 
     if (serial->isOpen())
     {
@@ -258,7 +273,6 @@ void MainWindow::closeWindow(){
         on_BTN_connecter_clicked();
     }
     MainWindow::close();
-
 }
 
 
