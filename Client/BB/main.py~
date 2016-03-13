@@ -5,7 +5,7 @@ import serial
 import menu
 import wiimote
 
-sleep(1) #Permet d'attend au démarrage que les dossiers pour les GPIOs sont créés
+sleep(1)
 
 BBIO.initPWM()
 BBIO.initGPIO()
