@@ -4,6 +4,7 @@ from time import sleep
 import serial
 import menu
 import wiimote
+import threading
 
 sleep(1) #Permet d'attend au démarrage que les dossiers pour les GPIOs sont créés
 
@@ -15,15 +16,17 @@ UART1 = serial.Serial(port="/dev/ttyO1", baudrate=115200, timeout=0)
 
 sleep(1)
 
+def Connexion_OK():
+	threading.Timer(1.0, Connexion_OK).start()
+	
+	if UART1.writable():
+		UART1.write('$\n')
+		
+Connexion_OK()
+
 Rx = "\0"
 
 UART1.flushInput()
-
-while Rx.find('$') == -1:
-
-	UART1.write("$\r\n")
-	sleep(0.1)
-	Rx = UART1.readline()
 
 Rx = "MODE,MANU"
 
