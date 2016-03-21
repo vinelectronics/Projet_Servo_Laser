@@ -13,7 +13,7 @@ def parametres(V, H, Laser, UART1):
 	else: Laser = "OFF"
 	
 	
-	chaine = "#PARAM,%s,%+d,%+d," % (Laser, H, V)
+	chaine = "#PARAM,%s,%+d,%+d,\r" % (Laser, H, V)
 	
 	UART1.write(chaine)
 	sleep(0.005)
